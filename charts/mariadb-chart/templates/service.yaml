@@ -4,6 +4,7 @@ metadata:
   name: mariadb-service-{{ .Values.env }}
   labels:
     app: mariadb
+    kind: database
 spec:
   ports:
   - port: 3306
