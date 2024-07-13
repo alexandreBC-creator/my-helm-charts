@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  mariadb-chart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-13T22:40:50.681373386Z"
+    description: A Helm chart for Kubernetes
+    digest: 4424559d4668130d67b10b4e076f8d483ca5d8b9e0101eb861534631adbb7d4c
+    name: mariadb-chart
+    type: application
+    urls:
+    - mariadb-chart-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-13T22:40:50.681380128Z"
