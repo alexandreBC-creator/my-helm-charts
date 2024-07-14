@@ -1,0 +1,26 @@
+# values.yaml
+
+# EPM Automate configuration
+epm:
+  login: "username"
+  password: "password"
+  url: "https://example.com"
+  task: "runTask"
+
+# CronJob schedule
+schedule: "0 0 * * *" # Default: daily at midnight
+
+# Image configuration
+image:
+  repository: my-epm-automate-image
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Resources requests and limits
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

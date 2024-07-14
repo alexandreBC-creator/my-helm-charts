@@ -1,0 +1,38 @@
+# templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "epm-automate.fullname" . }}-cronjob
+spec:
+  schedule: "{{ .Values.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: epm-automate
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command: ["/bin/sh", "-c"]
+            args:
+            - >
+              epmautomate login $(cat /config/epm-login) $(cat /config/epm-password) $(cat /config/epm-url) &&
+              epmautomate $(cat /config/epm-task) &&
+              epmautomate logout
+            volumeMounts:
+            - name: config-volume
+              mountPath: /config
+              readOnly: true
+            - name: secret-volume
+              mountPath: /secret
+              readOnly: true
+          restartPolicy: OnFailure
+          volumes:
+          - name: config-volume
+            configMap:
+              name: {{ include "epm-automate.fullname" . }}-configmap
+          - name: secret-volume
+            secret:
+              secretName: {{ include "epm-automate.fullname" . }}-secret
+      resources:
+        {{- toYaml .Values.resources | nindent 10 }}
