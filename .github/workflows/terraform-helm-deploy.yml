@@ -65,7 +65,7 @@ jobs:
         working-directory: ./terraform
         run: |
           terraform plan \
-            -var="kubeconfig_path=$HOME/.kube/config" \
+            -var-file="./env/dev.tfvars" \
             -out=tfplan
 
       - name: Upload Terraform Plan
